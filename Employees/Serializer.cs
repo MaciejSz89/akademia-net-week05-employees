@@ -28,14 +28,15 @@ namespace Employees
 
         public T Deserialize()
         {
-            throw new NotImplementedException();
-            //T item;
-            //using (FileStream fs = new FileStream(_filePath, FileMode.OpenOrCreate, FileAccess.Read))
-            //{                
-            //    TextReader tr = new StreamReader(fs);
-            //    fs.Close();
-            //}
-            //return item;
+
+            T item;
+            using (FileStream fs = new FileStream(_filePath, FileMode.OpenOrCreate, FileAccess.Read))
+            {
+                TextReader tr = new StreamReader(fs);
+                item = JsonConvert.DeserializeObject<T>(tr.ReadToEnd());
+                tr.Close();
+            }
+            return item;
         }
     }
 }

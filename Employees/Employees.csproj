@@ -7,7 +7,7 @@
     <ProjectGuid>{8F17F0CC-EC09-4E8D-BFD4-A4F52A01AB63}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Employers</RootNamespace>
-    <AssemblyName>Employers</AssemblyName>
+    <AssemblyName>Employees</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -49,7 +49,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddEditEmployee.cs" />
+    <Compile Include="AddEditEmployeeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddEditEmployeeForm.Designer.cs">
+      <DependentUpon>AddEditEmployeeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DismissEmployeeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DismissEmployeeForm.Designer.cs">
+      <DependentUpon>DismissEmployeeForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Employee.cs" />
     <Compile Include="ISerializer.cs" />
     <Compile Include="MainForm.cs">
@@ -61,6 +72,12 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Serializer.cs" />
+    <EmbeddedResource Include="AddEditEmployeeForm.resx">
+      <DependentUpon>AddEditEmployeeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DismissEmployeeForm.resx">
+      <DependentUpon>DismissEmployeeForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -86,6 +103,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EmployeesControls\EmployeesControls.csproj">
+      <Project>{E65E0366-D000-4239-940E-6E68877802A1}</Project>
+      <Name>EmployeesControls</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -8,6 +8,7 @@ namespace Employees
 {
     internal static class Program
     {
+        public const string CultureName = "pl-Pl";
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
