@@ -14,37 +14,50 @@ namespace Employees
             FirstName = firstName;
             LastName = lastName;
             Salary = salary;
-            HireDate = hireDate;
             IsHired = true;
+            HireDate = hireDate;
         }
         public void Dismiss(DateTime dismmissalDate)
         {
             this.DismissalDate = dismmissalDate;
             IsHired = false;
         }
+        private DateTime _hireDate;
+        private DateTime? _dismissalDate;
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public decimal Salary { get; set; }
-        public DateTime HireDate { get; set; }
-        public DateTime? DismissalDate { get; set; }
+        public DateTime HireDate 
+        { 
+            get 
+            { 
+                return _hireDate; 
+            } 
+            set 
+            {
+                if ((!IsHired && (new DateTime(value.Year, value.Month, value.Day) > new DateTime(_dismissalDate.Value.Year, _dismissalDate.Value.Month, _dismissalDate.Value.Day)))||IsHired)
+                    _hireDate = value;
+                
+            } 
+        }
+        public DateTime? DismissalDate
+        {
+            get
+            {
+                return _dismissalDate;
+            }
+            set
+            {
+                if (!IsHired && (new DateTime(value.Value.Year, value.Value.Month, value.Value.Day) > new DateTime(_hireDate.Year, _hireDate.Month, _hireDate.Day))) 
+                    _dismissalDate = value;
+                else
+                    _dismissalDate = _hireDate;
+            }
+        }
         public string Comments { get; set; }
         public bool IsHired { get; set; }
 
-        public bool IsDataValid()
-        {
-
-            if (!this.IsHired && new DateTime(this.DismissalDate.Value.Year, this.DismissalDate.Value.Month, this.DismissalDate.Value.Day) < new DateTime(this.HireDate.Year, this.HireDate.Month, this.HireDate.Day))
-            {
-                throw new Exception("Błąd! Data zatrudnienia jest późniejsza niż data zwolnienia");
-            }
-
-            if (this.FirstName == "" || this.LastName == "")
-            {
-                throw new Exception("Błąd. Imię i Nazwisko nie mogą być puste")
-            }
-            return true;
-        }
 
     }
 }

@@ -38,14 +38,15 @@ namespace Employees
         }
 
         private void InitializeControls()
-        {
-            Employee.IsHired = false;   
+        {              
             dtpDismissalDate.Value = Employee.DismissalDate != null ? (DateTime)Employee.DismissalDate : new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+
         }
 
         private void UpdateEmployeeData()
         {
-            Employee.DismissalDate = !Employee.IsHired ? (DateTime?)dtpDismissalDate.Value : null;
+            Employee.IsHired = false;
+            Employee.DismissalDate = (DateTime?)dtpDismissalDate.Value;
         }
     }
 }

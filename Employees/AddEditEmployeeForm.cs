@@ -72,16 +72,13 @@ namespace Employees
             UpdateEmployeeData();
             try
             {
-                if (Employee.IsDataValid())
-                {
-                    if (_addingNewEmployee)
-                        Employees.Add(Employee);
-                    Close();
-                }
+                if (_addingNewEmployee)
+                    Employees.Add(Employee);
+                Close();
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                MessageBox.Show(e.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
