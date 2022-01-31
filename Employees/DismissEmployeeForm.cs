@@ -28,6 +28,7 @@ namespace Employees
         private void btnConfirm_Click(object sender, EventArgs e)
         {
             UpdateEmployeeData();
+
             Close();
         }
 

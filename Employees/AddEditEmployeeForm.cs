@@ -70,12 +70,20 @@ namespace Employees
         private void btnConfirm_Click(object sender, EventArgs e)
         {
             UpdateEmployeeData();
-            if (IsDataValid())
+            try
             {
-                if (_addingNewEmployee)
-                    Employees.Add(Employee);
-                Close();
+                if (Employee.IsDataValid())
+                {
+                    if (_addingNewEmployee)
+                        Employees.Add(Employee);
+                    Close();
+                }
             }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -90,18 +98,6 @@ namespace Employees
             chbIsHired.Enabled = chbIsHired.Checked;
         }
 
-        private bool IsDataValid()
-        {
-            var datesAreValid = new DateTime(Employee.DismissalDate.Value.Year, Employee.DismissalDate.Value.Month, Employee.DismissalDate.Value.Day) < new DateTime(Employee.HireDate.Year, Employee.HireDate.Month, Employee.HireDate.Day);
-            var employeeHasFullName = Employee.FirstName != "" && Employee.LastName != "";
-            if (!Employee.IsHired && datesAreValid && employeeHasFullName)
-            {
-                MessageBox.Show("Data zatrudnienia jest późniejsza niż data zwolnienia", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-
-            return true;
-        }
 
 
     }

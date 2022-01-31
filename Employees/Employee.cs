@@ -31,5 +31,20 @@ namespace Employees
         public string Comments { get; set; }
         public bool IsHired { get; set; }
 
+        public bool IsDataValid()
+        {
+
+            if (!this.IsHired && new DateTime(this.DismissalDate.Value.Year, this.DismissalDate.Value.Month, this.DismissalDate.Value.Day) < new DateTime(this.HireDate.Year, this.HireDate.Month, this.HireDate.Day))
+            {
+                throw new Exception("Błąd! Data zatrudnienia jest późniejsza niż data zwolnienia");
+            }
+
+            if (this.FirstName == "" || this.LastName == "")
+            {
+                throw new Exception("Błąd. Imię i Nazwisko nie mogą być puste")
+            }
+            return true;
+        }
+
     }
 }
